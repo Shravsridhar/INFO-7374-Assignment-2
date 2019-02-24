@@ -1,4 +1,4 @@
-#Sys
+# Importing required libraries
 import os
 import numpy as np
 from PIL import Image
@@ -7,15 +7,13 @@ from matplotlib import pyplot as p
 from keras.models import Sequential
 from keras import optimizers
 from keras.layers import Dense, Dropout, Activation,Flatten,BatchNormalization
-#from keras_sequential_ascii import sequential_model_to_ascii_printout
-#from sklearn.metrics import classification_report, confusion_matrix
 from keras.layers import Conv2D,ZeroPadding2D, MaxPooling2D
 
-#Custom
+# Importing validation labellings
 from val_load import get_annotations_map
 
+# Loading images
 def load_images(path,num_classes):
-    #Load images
     
     print('Loading ' + str(num_classes) + ' classes')
 
@@ -74,6 +72,7 @@ def load_images(path,num_classes):
 
     return X_train,y_train,X_test,y_test
 
+# Model creation
 def model_creation():
 	model = Sequential()
         model.add(Conv2D(32, (3, 3), padding='same', input_shape= (32,32, 3)))
@@ -81,26 +80,22 @@ def model_creation():
 	model.add(MaxPooling2D(pool_size=(2, 2)))
 	
 	
-# conv2
+
 	model.add(Conv2D(32,(3, 3), padding='same'))
 	model.add(Activation('relu'))
 	model.add(MaxPooling2D(pool_size=(2, 2)))
 	
-	#model.add(Conv2D(32,(3,3),padding='same'))
-	#model.add(Activation('relu'))
-	#model.add(MaxPooling2D(pool_size=(2,2)))
-# conv3
+	
 	model.add(Conv2D(64, (3, 3), padding='same'))
 	model.add(Activation('relu'))
 	model.add(MaxPooling2D(pool_size=(2, 2)))
 	model.add(BatchNormalization())
 	model.add(Activation('relu'))
-# conv4
+
 	model.add(Conv2D(64, (3, 3), padding='same'))
 	model.add(Activation('relu'))
 	model.add(MaxPooling2D(pool_size=(2, 2)))
 
-# conv5
 	model.add(Conv2D(64, (3, 3), padding='same'))
 	model.add(Activation('relu'))
 	model.add(MaxPooling2D(pool_size=(2, 2)))
@@ -108,7 +103,6 @@ def model_creation():
 
 	model.add(Flatten())
 
-# fc1
 	model.add(Dense(2048))
 	model.add(Activation('relu'))
 	
@@ -123,66 +117,14 @@ def model_creation():
 	
 	model.add(Dense(512))
 	model.add(Activation('relu'))
-# fc2
+
 	model.add(Dense(no_class))
   	model.add(Activation('softmax'))
   	opt = optimizers.Adam(beta_1=.9,beta_2=.999,lr = learning_rate)
   	model.compile(loss='categorical_crossentropy', optimizer=opt,metrics=['accuracy'])
   	return model
 
-
-
-def model_creation1():
-  model = Sequential()
-  print('Input shape',X_train.shape[1:])
-  model.add(Conv2D(64,(3,3),input_shape=(X_train.shape[1:])))
-  model.add(Activation('relu'))
-  model.add(Conv2D(64,(3,3),padding="same"))
-  model.add(Activation('relu'))
-  model.add(MaxPooling2D(pool_size=(2,2),padding="same"))
-  model.add(BatchNormalization())
-  model.add(Activation('relu'))
-  
-
-  model.add(Conv2D(128,(3,3),activation='relu',padding="same"))
-  model.add(Conv2D(128,(3,3),padding="same"))
-  model.add(Activation('relu'))
-  model.add(MaxPooling2D(pool_size=(2,2),padding="same"))
-  model.add(BatchNormalization())
-  model.add(Activation('relu'))
-  
-
-  model.add(Conv2D(256,(3,3),padding="same",activation='relu'))
-  model.add(Conv2D(256,(3,3),padding="same",activation='relu'))
-  model.add(MaxPooling2D(pool_size=(2,2),padding="same"))
-  model.add(BatchNormalization())
-  model.add(Activation('relu'))
-  #model.add(Dropout(0.25))
-  
-  
-  model.add(Conv2D(512,(3,3),padding="same"))
-  model.add(Activation('relu'))
-  model.add(Conv2D(512,(3,3),padding="same"))
-  model.add(Activation('relu'))
-  model.add(MaxPooling2D(pool_size=(2,2),padding="same"))
-  model.add(BatchNormalization())
-  model.add(Activation('relu'))
-  model.add(Dropout(0.25))
-
-  model.add(Flatten())
-  model.add(Dense(512))
-  model.add(Activation('relu'))
-  model.add(Dense(512))
-  model.add(Activation('relu'))
-  model.add(Dense(512))
-  model.add(Activation('relu'))
-  model.add(Dense(no_class))
-  model.add(Activation('softmax'))
-  opt = optimizers.Adam(beta_1=.9,beta_2=.999,lr = learning_rate)
-  model.compile(loss='categorical_crossentropy', optimizer=opt,metrics=['accuracy'])
-  return model
-
-
+# Model performance functions
 def plot_modelacc(fit_model):
     with p.style.context('ggplot'):
             p.plot(fit_model.history['acc'])
@@ -204,6 +146,7 @@ def plot_model_loss(fit_model):
     return p.show()
 
 
+# Main
 if __name__ == "__main__":
     import matplotlib.pyplot as plt
     print("In main file")	
@@ -229,44 +172,3 @@ if __name__ == "__main__":
     plot_model_loss(cnn_1)
  
 
-#    fig1 = plt.figure()
-#    fig1.suptitle('Train data')
-#    ax1 = fig1.add_subplot(221)
-#    ax1.axis("off")
-#    ax1.imshow(np.transpose(X_train[0],(1,2,0)))
-#    print(y_train[0])
-#    ax2 = fig1.add_subplot(222)
-#    ax2.axis("off")
-#    ax2.imshow(np.transpose(X_train[499],(1,2,0)))
-#    print(y_train[499])
-#    ax3 = fig1.add_subplot(223)
-#    ax3.axis("off")
-#    ax3.imshow(np.transpose(X_train[500],(1,2,0)))
-#    print(y_train[500])
-#    ax4 = fig1.add_subplot(224)
-#    ax4.axis("off")
-#    ax4.imshow(np.transpose(X_train[999],(1,2,0)))
-#    print(y_train[999])
-
-#    plt.show()
-
-#    fig2 = plt.figure()
-#    fig2.suptitle('Test data')
-#    ax1 = fig2.add_subplot(221)
-#    ax1.axis("off")
-#    ax1.imshow(np.transpose(X_test[0],(1,2,0)))
-#    print(y_test[0])
-#    ax2 = fig2.add_subplot(222)
-#    ax2.axis("off")
-#    ax2.imshow(np.transpose(X_test[49],(1,2,0)))
-#    print(y_test[49])
-#    ax3 = fig2.add_subplot(223)
-#    ax3.axis("off")
-#    ax3.imshow(np.transpose(X_test[50],(1,2,0)))
-#    print(y_test[50])
-#    ax4 = fig2.add_subplot(224)
-#    ax4.axis("off")
-#    ax4.imshow(np.transpose(X_test[99],(1,2,0)))
-#    print(y_test[99])
-    
-#    plt.show()
