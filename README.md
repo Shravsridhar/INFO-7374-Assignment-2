@@ -10,3 +10,5 @@ Report:
 https://github.com/Shravsridhar/INFO-7374-Assignment-2/blob/master/Assignment%202%20Team%20Report%20Final%201.pdf
 
 Link to all observations and code details are in the report
+
+Trial and Error: Folder contains some sample of experiments performed during hypertuning
