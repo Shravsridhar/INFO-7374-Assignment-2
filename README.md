@@ -11,4 +11,9 @@ https://github.com/Shravsridhar/INFO-7374-Assignment-2/blob/master/Assignment%20
 
 Link to all observations and code details are in the report
 
+Comparison tab for experiments: 
+
+https://github.com/Shravsridhar/INFO-7374-Assignment-2/blob/master/comparison%20tab.PNG
+
+
 Trial and Error: Folder contains some sample of experiments performed during hypertuning
