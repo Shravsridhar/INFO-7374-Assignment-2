@@ -15,5 +15,10 @@ Comparison tab for experiments:
 
 https://github.com/Shravsridhar/INFO-7374-Assignment-2/blob/master/comparison%20tab.PNG
 
+Google Sheets:
+Part 1:
+https://docs.google.com/spreadsheets/d/1ANlieYHWwjxCinbG5UO6CtU2lctQrRmYyK1Q231_aPE/edit#gid=299622262
+Part 2:
+https://docs.google.com/spreadsheets/d/1hl7vIWUg05e_pCSIjPQ3AnZwxRS-TTpvdjYA8EIwp0Y/edit#gid=0
 
 Trial and Error: Folder contains some sample of experiments performed during hypertuning
